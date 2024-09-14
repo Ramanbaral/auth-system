@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #loggedin-status {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: green;
+            visibility: hidden;
+        }
+    </style>
+    <title>Home</title>
+</head>
+<body>
+    <div>
+        User information: 
+        <div id="usr-information"></div>
+    </div>
+    <a href="/signup.html">Signup</a>
+    <br>
+    <br>
+    <a href="/signin.html">Signin</a>
+    <br>
+    <br>
+    <span id="loggedin-status">Logged IN</span>
+    <button onclick="logout()" id="logout-btn">Logout</button>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <script>
+        function logout() {
+            console.log("logout")
+            localStorage.removeItem("my-auth-system-demo-token")
+            document.getElementById("logout-btn").style.display = "none";
+            document.getElementById("loggedin-status").style.visibility = "hidden"
+
+        }
+    
+        const token = localStorage.getItem("my-auth-system-demo-token")
+        if( token === null ) {
+            document.getElementById("logout-btn").style.display = "none";
+        } else {
+            document.getElementById("loggedin-status").style.visibility = "visible"
+            //fetch user inf and display 
+            axios.get('/me', {
+                headers: {
+                    Authorization: token
+                }
+            })
+                .then(function (response) {
+                    const usr = response.data.username
+                    const em = response.data.email
+                    console.log(usr, em);
+                    const usrInfEle = document.getElementById("usr-information")
+                    usrInfEle.innerHTML = `<span>Username: ${usr}</span><br><span>Email: ${em}</span>`
+                })
+                .catch(function (error) {
+                    // handle error
+                    alert(error.response.data.msg)
+                })
+        }
+    </script>
+</body>
+</html>
+
+
