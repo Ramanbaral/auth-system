@@ -4,4 +4,8 @@
 -trying using cookie to store JWT
 -make auth system for a social media (connect)
 -add verify email feature 
--add OAuth (signin with google)
+-add OAuth (signin with google) passport.js
+-refresh token
+- multiple logins 
+- add typescript 
+- make this Auth Microsevices and use in [ connect ] 
