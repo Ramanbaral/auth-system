@@ -1,6 +1,6 @@
 -add postgres DB and Use prisma ORM
 -use shadcn for ui 
--Dockerise the project 
+-Dockerise the project (docker-compose.yml)
 -trying using cookie to store JWT
 -make auth system for a social media (connect)
 -add verify email feature 
