@@ -8,4 +8,6 @@
 -refresh token
 - multiple logins 
 - add typescript 
-- make this Auth Microsevices and use in [ connect ] 
+- make this Auth Microsevices and use in [ connect ]
+- route to modify bio and profileimg 
+- add log (winston)
