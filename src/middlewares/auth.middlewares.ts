@@ -5,16 +5,13 @@ import dotenv from 'dotenv';
 import { IuserInReq } from '../typings';
 
 dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET || "somesecret";
-console.log(JWT_SECRET);
+const JWT_SECRET = process.env.JWT_SECRET || 'somesecret';
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
   if (token) {
-
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
       if (err) {
-
         res.status(401).json({
           error: true,
           msg: 'Unauthorized',

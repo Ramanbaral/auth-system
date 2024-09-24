@@ -1,14 +1,12 @@
 import { Router } from 'express';
 
-import { healthCheck, userInf } from '../controllers/app.controllers';
-import { auth } from '../middlewares/auth.middlewares';
+import { healthCheck, userInf } from '../controllers/app.controllers.js';
+import { auth } from '../middlewares/auth.middlewares.js';
 
-const router = Router();
+const appRouter = Router();
 
-router.get('/', healthCheck);
+appRouter.get('/', healthCheck);
 
-router.use(auth);
+appRouter.get('/me', auth, userInf);
 
-router.get('/me', userInf);
-
-export default router;
+export default appRouter;
