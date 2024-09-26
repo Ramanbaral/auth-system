@@ -1,44 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signin</title>
-</head>
-<body>
+  </head>
+  <body>
     <label for="username">Username</label>
-    <input type="text" name="username" id="username" placeholder="username">
-    <br>
+    <input type="text" name="username" id="username" placeholder="username" />
+    <br />
     <label for="pwd">Password</label>
-    <input type="password" name="pwd" id="pwd">
-    <br>
-    <br>
+    <input type="password" name="pwd" id="pwd" />
+    <br />
+    <br />
     <button onclick="signin()">Signin</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
 
     <script>
-        function signin() {
-            const username = document.getElementById("username").value 
-            const pwd = document.getElementById("pwd").value 
+      function signin() {
+        const username = document.getElementById('username').value;
+        const pwd = document.getElementById('pwd').value;
 
-            const bd = {
-                un: username,
-                pwd: pwd 
-            }
+        const bd = {
+          un: username,
+          pwd: pwd,
+        };
 
-            axios.post('/signin', bd)
-            .then(function (response) {
-                console.log(response);
-                console.log(response.data.token)
-                localStorage.setItem("my-auth-system-demo-token", response.data.token)
-                alert(response.data.msg)
-
-            })
-            .catch(function (error) {
-                console.log(error);
-                alert(error.response.data.msg)
-            });
-        }
+        axios
+          .post('/signin', bd)
+          .then(function (response) {
+            console.log(response);
+            console.log(response.data.token);
+            localStorage.setItem(
+              'my-auth-system-demo-token',
+              response.data.token,
+            );
+            alert(response.data.msg);
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert(error.response.data.msg);
+          });
+      }
     </script>
-</body>
+  </body>
 </html>

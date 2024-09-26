@@ -1,13 +1,11 @@
 -add postgres DB and Use prisma ORM
 -use shadcn for ui 
 -Dockerise the project (docker-compose.yml)
--trying using cookie to store JWT
--make auth system for a social media (connect)
 -add verify email feature 
+-add password reset featuer
 -add OAuth (signin with google) passport.js
 -refresh token
 - multiple logins 
-- add typescript 
 - make this Auth Microsevices and use in [ connect ]
 - route to modify bio and profileimg 
 - add log (winston)

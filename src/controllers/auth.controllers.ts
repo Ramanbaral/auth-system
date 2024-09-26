@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET || 'somesecret';
+const SALTROUNDS = 3;
 const p = new PrismaClient();
 
 export const signin = async (req: Request, res: Response) => {
@@ -14,12 +16,15 @@ export const signin = async (req: Request, res: Response) => {
   const pwd = req.body.pwd;
 
   try {
-    const usr = await p.user.findUniqueOrThrow({
+    const usr = await p.user.findFirstOrThrow({
       where: {
         username: username,
-        password: pwd,
       },
     });
+
+    //check pwd with hashed password 
+    const pwdMatch = await bcrypt.compare(pwd, usr.password);
+    if (!pwdMatch) throw new Error('Invalid password');
 
     const token = jwt.sign(
       {
@@ -54,11 +59,14 @@ export const signup = async (req: Request, res: Response) => {
   const dob = req.body.dob;
 
   try {
-    const u = await p.user.create({
+    //hash the pwd before storing in DB
+    const hashedPwd = await bcrypt.hash(pwd, SALTROUNDS);
+
+    await p.user.create({
       data: {
         username: username,
         email: email,
-        password: pwd, //hash pwd 
+        password: hashedPwd,
         fname: fname,
         lname: lname,
         gender: gender,
