@@ -8,4 +8,5 @@
 - multiple logins 
 - make this Auth Microsevices and use in [ connect ]
 - route to modify bio and profileimg 
+- add cache (memcached)
 - add log (winston)

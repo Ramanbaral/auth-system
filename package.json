@@ -8,6 +8,8 @@
     "start:server": "node dist/index.js",
     "start:dev-server": "nodemon dist/index.js",
     "buildnrun": "tsc && node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "prisma:migrate": "npx prisma migrate dev",
     "format": "npx prettier . --write"
   },
   "keywords": [],
