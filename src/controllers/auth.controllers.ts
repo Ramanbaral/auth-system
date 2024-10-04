@@ -20,9 +20,13 @@ export const signin = async (req: Request, res: Response) => {
       where: {
         username: username,
       },
+      select: {
+        username: true,
+        password: true,
+      },
     });
 
-    //check pwd with hashed password 
+    //check pwd with hashed password
     const pwdMatch = await bcrypt.compare(pwd, usr.password);
     if (!pwdMatch) throw new Error('Invalid password');
 
